@@ -1,0 +1,27 @@
+﻿@model KapelMajster.Models.PrzenoszenieDanych
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h3>@ViewData["Message"]</h3>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">Dodaj kategorię</button>
+<div class="modal fade" id="addCategory">
+    <form asp-action="Index">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Dodaj nową kategorię</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div><label asp-for="CategoryName" class="control-label">Nazwa kategorii</label><input asp-for="CategoryName" class="form-control" /></div>
+                </div>
+                <div class="modal-footer ">
+                    <input type="submit" class="btn btn-primary" value="Create" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                </div>
+            </div>
+        </div>
+        </form>
+</div>

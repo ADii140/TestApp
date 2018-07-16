@@ -1,0 +1,11 @@
+D:\Repos\KapelMajster\KapelMajster\bin\Debug\netcoreapp2.0\KapelMajster.deps.json
+D:\Repos\KapelMajster\KapelMajster\bin\Debug\netcoreapp2.0\KapelMajster.runtimeconfig.json
+D:\Repos\KapelMajster\KapelMajster\bin\Debug\netcoreapp2.0\KapelMajster.runtimeconfig.dev.json
+D:\Repos\KapelMajster\KapelMajster\bin\Debug\netcoreapp2.0\KapelMajster.dll
+D:\Repos\KapelMajster\KapelMajster\bin\Debug\netcoreapp2.0\KapelMajster.pdb
+D:\Repos\KapelMajster\KapelMajster\obj\Debug\netcoreapp2.0\KapelMajster.csprojResolveAssemblyReference.cache
+D:\Repos\KapelMajster\KapelMajster\obj\Debug\netcoreapp2.0\KapelMajster.csproj.CoreCompileInputs.cache
+D:\Repos\KapelMajster\KapelMajster\obj\Debug\netcoreapp2.0\KapelMajster.AssemblyInfoInputs.cache
+D:\Repos\KapelMajster\KapelMajster\obj\Debug\netcoreapp2.0\KapelMajster.AssemblyInfo.cs
+D:\Repos\KapelMajster\KapelMajster\obj\Debug\netcoreapp2.0\KapelMajster.dll
+D:\Repos\KapelMajster\KapelMajster\obj\Debug\netcoreapp2.0\KapelMajster.pdb
