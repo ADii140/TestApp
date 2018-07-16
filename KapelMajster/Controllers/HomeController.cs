@@ -12,6 +12,7 @@ namespace KapelMajster.Controllers
     {
         public IActionResult Index()
         {
+            List<Category> categories = new CategoryModel().Category;
             ViewData["Message"] = "Tutaj możesz dodawać kategorie do bazy";
             return View();
         }
@@ -35,7 +36,7 @@ namespace KapelMajster.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(PrzenoszenieDanych dane)
+        public IActionResult Index(Category dane)
         {
             string CategoryName = dane.CategoryName;
             return View();
