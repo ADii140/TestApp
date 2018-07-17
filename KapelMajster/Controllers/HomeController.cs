@@ -12,9 +12,9 @@ namespace KapelMajster.Controllers
     {
         public IActionResult Index()
         {
-            List<Category> categories = new CategoryModel().Category;
+            CategoryViewModel categoriesList = new CategoryViewModel();
             ViewData["Message"] = "Tutaj możesz dodawać kategorie do bazy";
-            return View();
+            return View(categoriesList.categories);
         }
 
         public IActionResult About()
@@ -35,11 +35,13 @@ namespace KapelMajster.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [HttpPost]
-        public IActionResult Index(Category dane)
+[HttpPost]
+       public IActionResult Index(List<Category> dane)
         {
-            string CategoryName = dane.CategoryName;
-            return View();
+            CategoryViewModel categoriesList = new CategoryViewModel();
+            return View(categoriesList.categories);
         }
+
     }
+
 }

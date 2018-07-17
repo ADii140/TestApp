@@ -1,0 +1,23 @@
+﻿@model  Category
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">Dodaj kategorię</button>
+<div class="modal fade" id="addCategory">
+    <form asp-action="Index">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Dodaj nową kategorię</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div><label class="CategoryName">Nazwa kategorii</label><input asp-for="CategoryName" class="form-control" /></div>
+                    <div><label asp-for="CategoryDescription" class="control-label">Opis kategorii</label><input asp-for="CategoryDescription" class="form-control" /></div>
+                </div>
+                <div class="modal-footer ">
+                    <input type="submit" class="btn btn-primary" value="Create" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

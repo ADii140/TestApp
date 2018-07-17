@@ -1,27 +1,33 @@
-﻿@model KapelMajster.Models.Category
+﻿@model List<Category>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 <h3>@ViewData["Message"]</h3>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">Dodaj kategorię</button>
-<div class="modal fade" id="addCategory">
-    <form asp-action="Index">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Dodaj nową kategorię</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div><label asp-for="CategoryName" class="control-label">Nazwa kategorii</label><input asp-for="CategoryName" class="form-control" /></div>
-                </div>
-                <div class="modal-footer ">
-                    <input type="submit" class="btn btn-primary" value="Create" />
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
-                </div>
+<div class="card">
+        <div class="card-body">
+            <div id="table" class="table-editable">
+                <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a></span>
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <tr>
+                        <th class="text-center">Nazwa kategorii</th>
+                        <th class="text-center">Opis</th>
+                        <th class="text-center">Remove</th>
+                    </tr>
+                    @foreach (var item in Model)
+    {
+                    <tr>
+                        <td class="pt-3-half" contenteditable="true">@item.CategoryName</td>
+                        <td class="pt-3-half" contenteditable="true">@item.CategoryDescription</td>
+                        <td>
+                            <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+                        </td>
+                        </tr>
+                        }
+
+                </table>
             </div>
         </div>
-        </form>
-</div>
+    </div>
+@Html.Partial(@"~/Views/Shared/_PartialAddCategoryView.cshtml", new Category("",""))
