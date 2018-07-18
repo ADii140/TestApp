@@ -18,10 +18,27 @@
                     @foreach (var item in Model)
     {
                     <tr>
-                        <td class="pt-3-half" contenteditable="true">@item.CategoryName</td>
-                        <td class="pt-3-half" contenteditable="true">@item.CategoryDescription</td>
+                        <td class="pt-3-half" contenteditable="true">@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                        <td class="pt-3-half" contenteditable="true">@Html.DisplayFor(modelItem => item.CategoryDescription)</td>
                         <td>
-                            <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
+                            <span>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeCategory">Remove</button>
+                            </span>
+                            <div class="modal fade" id="removeCategory">
+                                <form asp-action="Remove">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Czy na pewno chcesz usunąć kategorię @Html.DisplayFor(modelItem => item.CategoryName)?</h4>
+                                            </div>
+                                            <div class="modal-footer ">
+                                                <input asp-for="@item" type="submit" class="btn btn-primary" value="@item.CategoryName" />
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </td>
                         </tr>
                         }

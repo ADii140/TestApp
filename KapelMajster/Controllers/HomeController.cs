@@ -35,13 +35,22 @@ namespace KapelMajster.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-[HttpPost]
-       public IActionResult Index(List<Category> dane)
+       [HttpPost]
+       public IActionResult Index(string CategoryName, string CategoryDescription)
         {
+            Category.AddCategoryToDb(CategoryName, CategoryDescription);
             CategoryViewModel categoriesList = new CategoryViewModel();
             return View(categoriesList.categories);
         }
 
+        [HttpPost]
+        [ActionName("Remove")]
+        public IActionResult Index(string item)
+        {
+            Category.RemoveCateogryFromDb(item);
+            CategoryViewModel categoriesList = new CategoryViewModel();
+            return RedirectToAction("Index");
+        }
     }
 
 }
