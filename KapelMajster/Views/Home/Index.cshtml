@@ -13,26 +13,27 @@
                     <tr>
                         <th class="text-center">Nazwa kategorii</th>
                         <th class="text-center">Opis</th>
-                        <th class="text-center">Remove</th>
+                        <th class="text-center">Usuń</th>
                     </tr>
                     @foreach (var item in Model)
     {
                     <tr>
-                        <td class="pt-3-half" contenteditable="true">@Html.DisplayFor(modelItem => item.CategoryName)</td>
-                        <td class="pt-3-half" contenteditable="true">@Html.DisplayFor(modelItem => item.CategoryDescription)</td>
+                        <td class="pt-3-half" contenteditable="true">@Html.DisplayFor(m => item.CategoryName)</td>
+                        <td class="pt-3-half" contenteditable="true">@Html.DisplayFor(m => item.CategoryDescription)</td>
                         <td>
                             <span>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeCategory">Remove</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeCategory-@item.CategoryName">Usuń</button>
                             </span>
-                            <div class="modal fade" id="removeCategory">
-                                <form asp-action="Remove">
+                            <div class="modal fade" id="removeCategory-@item.CategoryName">
+                                <form asp-action="Remove" id="RemoveCategory-@item.CategoryName">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Czy na pewno chcesz usunąć kategorię @Html.DisplayFor(modelItem => item.CategoryName)?</h4>
+                                                <h4 class="modal-title">Czy na pewno chcesz usunąć kategorię <label>@item.CategoryName</label>?</h4>
+                                                <input asp-for="@item" type="hidden" value="@item.CategoryName"/>
                                             </div>
-                                            <div class="modal-footer ">
-                                                <input asp-for="@item" type="submit" class="btn btn-primary" value="@item.CategoryName" />
+                                            <div class="modal-footer ">    
+                                                <input type="submit" class="btn btn-primary" value="Usuń" />
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
                                             </div>
                                         </div>

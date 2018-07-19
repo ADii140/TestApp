@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KapelMajster.Models
 {
@@ -44,6 +42,7 @@ namespace KapelMajster.Models
             {
                 SqlCommand insert = new SqlCommand(@"insert into Kategorie (kat_nazwa,kat_opis) values (@name,@desc)",conn);
                 insert.Parameters.AddWithValue("@name", CategoryName);
+                CategoryDescription = (CategoryDescription == null) ? DBNull.Value.ToString() : CategoryDescription;
                 insert.Parameters.AddWithValue("@desc", CategoryDescription);
                 conn.Open();
                 insert.ExecuteNonQuery();

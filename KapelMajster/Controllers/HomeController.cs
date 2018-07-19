@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using KapelMajster.Models;
 
@@ -39,8 +35,8 @@ namespace KapelMajster.Controllers
        public IActionResult Index(string CategoryName, string CategoryDescription)
         {
             Category.AddCategoryToDb(CategoryName, CategoryDescription);
-            CategoryViewModel categoriesList = new CategoryViewModel();
-            return View(categoriesList.categories);
+            return RedirectToAction("Index");
+
         }
 
         [HttpPost]
@@ -48,7 +44,6 @@ namespace KapelMajster.Controllers
         public IActionResult Index(string item)
         {
             Category.RemoveCateogryFromDb(item);
-            CategoryViewModel categoriesList = new CategoryViewModel();
             return RedirectToAction("Index");
         }
     }
