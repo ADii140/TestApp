@@ -6,24 +6,24 @@ namespace KapelMajster.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
-        {
-            CategoryViewModel categoriesList = new CategoryViewModel();
-            ViewData["Message"] = "Tutaj możesz dodawać kategorie do bazy";
-            return View(categoriesList.categories);
-        }
+        //public IActionResult Index()
+        //{
+        //    CategoryViewModel categoriesList = new CategoryViewModel();
+        //    ViewData["Message"] = "Tutaj możesz dodawać kategorie do bazy";
+        //    return View(categoriesList.categories);
+        //}
 
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
         public IActionResult Kategorie()
-        { 
-
-            return View();
+        {
+            CategoryViewModel categoriesList = new CategoryViewModel();
+            ViewData["Message"] = "Tutaj możesz dodawać kategorie do bazy";
+            return View(categoriesList.categories);
         }
 
         public IActionResult Error()
@@ -31,20 +31,20 @@ namespace KapelMajster.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-       [HttpPost]
-       public IActionResult Index(string CategoryName, string CategoryDescription)
+        [HttpPost]
+        public IActionResult Kategorie(string CategoryName, string CategoryDescription)
         {
             Category.AddCategoryToDb(CategoryName, CategoryDescription);
-            return RedirectToAction("Index");
+            return RedirectToAction("Kategorie");
 
         }
 
         [HttpPost]
         [ActionName("Remove")]
-        public IActionResult Index(string item)
+        public IActionResult Kategorie(string item)
         {
             Category.RemoveCateogryFromDb(item);
-            return RedirectToAction("Index");
+            return RedirectToAction("Kategorie");
         }
     }
 
