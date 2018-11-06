@@ -13,17 +13,18 @@ namespace KapelMajster.Controllers
         //    return View(categoriesList.categories);
         //}
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-            return View();
-        }
-
         public IActionResult Kategorie()
         {
             CategoryViewModel categoriesList = new CategoryViewModel();
             ViewData["Message"] = "Tutaj możesz dodawać kategorie do bazy";
             return View(categoriesList.categories);
+        }
+
+        public IActionResult Wydatki()
+        {
+            OutcomeViewModel outcomeList = new OutcomeViewModel();
+            ViewData["Message"] = "Tutaj możesz dodawać wydatki do bazy";
+            return View(outcomeList.outcomes);
         }
 
         public IActionResult Error()
@@ -36,7 +37,6 @@ namespace KapelMajster.Controllers
         {
             Category.AddCategoryToDb(CategoryName, CategoryDescription);
             return RedirectToAction("Kategorie");
-
         }
 
         [HttpPost]
@@ -45,6 +45,21 @@ namespace KapelMajster.Controllers
         {
             Category.RemoveCateogryFromDb(item);
             return RedirectToAction("Kategorie");
+        }
+
+        [HttpPost]
+        public IActionResult Wydatki(string OutcomeName, string OutcomeValue, string OutcomeCategory)
+        {
+            Outcome.AddOutcomeToDb(OutcomeName, OutcomeValue, OutcomeCategory,"12/12/2012");
+            return RedirectToAction("Wydatki");
+        }
+
+        [HttpPost]
+        [ActionName("Remove")]
+        public IActionResult Wydatki(string OutcomeName, string OutcomeValue, string OutcomeCategory, string OutcomeDate)
+        {
+            Outcome.RemoveOutcomeFromDb(OutcomeName, OutcomeValue, OutcomeCategory, OutcomeDate);
+            return RedirectToAction("Wydatki");
         }
     }
 

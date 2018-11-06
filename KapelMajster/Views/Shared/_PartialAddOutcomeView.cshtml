@@ -1,0 +1,32 @@
+﻿@model Outcome
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOutcome">Dodaj wydatek</button>
+<div class="modal fade" id="addOutcome">
+    <form asp-action="Wydatki" onsubmit="window.location.reload">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Dodaj nowy wydatek</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label class="control-label">Nazwa</label><input asp-for="OutcomeName" class="form-control" />
+                    </div>
+                    <div>
+                        <label class="control-label">Kwota</label><input asp-for="OutcomeValue" class="form-control" />
+                    </div>
+                    <div>
+                        <label class="control-label">Data</label><input asp-for="OutcomeDate" class="form-control" />
+                    </div>
+                    <div>
+                        <label class="control-label">Kategoria</label><input asp-for="OutcomeCategory" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <input type="submit" class="btn btn-primary" value="Dodaj" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

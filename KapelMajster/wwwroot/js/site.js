@@ -3,7 +3,6 @@ var $TABLE = $('#table');
 var $BTN = $('#export-btn');
 var $EXPORT = $('#export');
 
-
 $('.table-remove').click(function () {
   $(this).parents('tr').detach();
 });

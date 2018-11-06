@@ -9,49 +9,59 @@
     <div class="card-body">
         <div id="table" class="table-editable">
             <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a></span>
-            <table class="table table-bordered table-responsive-md table-striped text-center">
-                <tr>
-                    <th class="text-center">Nazwa kategorii</th>
-                    <th class="text-center">Opis</th>
-                    <th class="text-center">Usuń</th>
-                </tr>
-                @if (Model.Count == 0)
-                {
+            <table class="table table-bordered table-responsive-md table-striped text-center" id="dtBasicExample">
+                <thead>
                     <tr>
-                        <td colspan="3">Brak wpisów</td>
+                        <th class="th-sm text-center">
+                            Nazwa kategorii
+                        </th>
+                        <th class="th-sm text-center">
+                            Opis
+                        </th>
+                        <th class="th-sm text-center">
+                            Usuń
+                        </th>
                     </tr>
-                }
-                else
-                {
-                    @foreach (var item in Model)
+                </thead>
+                <tbody>
+                    @if (Model.Count == 0)
                     {
                         <tr>
-                            <td class="pt-3-half" contenteditable="true">@Html.DisplayFor(m => item.CategoryName)</td>
-                            <td class="pt-3-half" contenteditable="true">@Html.DisplayFor(m => item.CategoryDescription)</td>
-                            <td>
-                                <span>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeCategory-@item.CategoryName.Replace(" ","")">Usuń</button>
-                                </span>
-                                <div class="modal fade" id="removeCategory-@item.CategoryName.Replace(" ","")">
-                                    <form asp-action="Remove" id="RemoveCategory-@item.CategoryName.Replace(" ","")">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Czy na pewno chcesz usunąć kategorię <label>@item.CategoryName</label>?</h4>
-                                                    <input asp-for="@item" type="hidden" value="@item.CategoryName" />
-                                                </div>
-                                                <div class="modal-footer ">
-                                                    <input type="submit" class="btn btn-primary" value="Usuń" />
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </td>
+                            <td colspan="3">Brak wpisów</td>
                         </tr>
                     }
-                }
+                    else
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="pt-3-half" contenteditable="true">@Html.DisplayFor(m => item.CategoryName)</td>
+                                <td class="pt-3-half" contenteditable="true">@Html.DisplayFor(m => item.CategoryDescription)</td>
+                                <td>
+                                    <span>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeCategory-@item.CategoryName.Replace(" ","")">Usuń</button>
+                                    </span>
+                                    <div class="modal fade" id="removeCategory-@item.CategoryName.Replace(" ","")">
+                                        <form asp-action="Remove" id="RemoveCategory-@item.CategoryName.Replace(" ","")">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Czy na pewno chcesz usunąć kategorię <label>@item.CategoryName</label>?</h4>
+                                                        <input asp-for="@item" type="hidden" value="@item.CategoryName" />
+                                                    </div>
+                                                    <div class="modal-footer ">
+                                                        <input type="submit" class="btn btn-primary" value="Usuń" />
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
             </table>
         </div>
     </div>
