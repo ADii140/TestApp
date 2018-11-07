@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace KapelMajster.Models
 {
@@ -14,11 +15,14 @@ namespace KapelMajster.Models
             using (SqlConnection conn = new SqlConnection(connectionstring))
             {
                 conn.Open();
-                SqlCommand select = new SqlCommand(@"select kat_nazwa, kat_opis from Kategorie", conn);
-                SqlDataReader reader = select.ExecuteReader();
+                SqlCommand command = new SqlCommand();
+                command.CommandText = "PobierzKategorie";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Connection = conn;
+                SqlDataReader reader = command.ExecuteReader();
                while(reader.Read())
                 {
-                    categories.Add(new Category(reader["kat_nazwa"].ToString(), reader["kat_opis"].ToString()));
+                    categories.Add(new Category(int.Parse(reader["kat_id"].ToString()),reader["kat_nazwa"].ToString(), reader["kat_opis"].ToString()));
                 }
                 conn.Close();
             }
@@ -27,11 +31,13 @@ namespace KapelMajster.Models
 
     public class Category
     {
+        public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
         private static string  connectionstring = @"Server=localhost;Integrated Security=true;database=Kapelmajster";
-        public Category(string name, string description)
+        public Category(int id, string name, string description)
         {
+            this.CategoryId = id;
             this.CategoryName = name;
             this.CategoryDescription = description;
         }
@@ -40,24 +46,30 @@ namespace KapelMajster.Models
         {
             using (SqlConnection conn = new SqlConnection(connectionstring))
             {
-                SqlCommand insert = new SqlCommand(@"insert into Kategorie (kat_nazwa,kat_opis) values (@name,@desc)",conn);
-                insert.Parameters.AddWithValue("@name", CategoryName);
-                CategoryDescription = (CategoryDescription == null) ? DBNull.Value.ToString() : CategoryDescription;
-                insert.Parameters.AddWithValue("@desc", CategoryDescription);
+                SqlCommand command = new SqlCommand();
+                command.CommandText = "DodajKategorie";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Connection = conn;
+                command.Parameters.AddWithValue("@nazwa", CategoryName);
+                command.Parameters.AddWithValue("@opis", CategoryDescription);
                 conn.Open();
-                insert.ExecuteNonQuery();
+                command.ExecuteNonQuery();
                 conn.Close();
             }
         }
         
-        public static void RemoveCateogryFromDb(string CategoryName)
+        public static void RemoveCateogryFromDb(int CategoryId)
         {
             using (SqlConnection conn = new SqlConnection(connectionstring))
             {
-                SqlCommand delete = new SqlCommand(@"delete Kategorie where kat_nazwa = @name", conn);
-                delete.Parameters.AddWithValue("@name", CategoryName);
+
+                SqlCommand command = new SqlCommand();
+                command.CommandText = "UsunKategorie";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Connection = conn;
+                command.Parameters.AddWithValue("@id", CategoryId);
                 conn.Open();
-                delete.ExecuteNonQuery();
+                command.ExecuteNonQuery();
                 conn.Close();
             }
         }

@@ -42,12 +42,12 @@
                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeCategory-@item.CategoryName.Replace(" ","")">Usuń</button>
                                     </span>
                                     <div class="modal fade" id="removeCategory-@item.CategoryName.Replace(" ","")">
-                                        <form asp-action="Remove" id="RemoveCategory-@item.CategoryName.Replace(" ","")">
+                                        <form asp-action="RemoveCategory" id="RemoveCategory-@item.CategoryName.Replace(" ","")">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h4 class="modal-title">Czy na pewno chcesz usunąć kategorię <label>@item.CategoryName</label>?</h4>
-                                                        <input asp-for="@item" type="hidden" value="@item.CategoryName" />
+                                                        <input asp-for="@item" type="hidden" value="@item.CategoryId" />
                                                     </div>
                                                     <div class="modal-footer ">
                                                         <input type="submit" class="btn btn-primary" value="Usuń" />
@@ -66,4 +66,4 @@
         </div>
     </div>
 </div>
-@Html.Partial(@"~/Views/Shared/_PartialAddCategoryView.cshtml", new Category("", ""))
+@Html.Partial(@"~/Views/Shared/_PartialAddCategoryView.cshtml", new Category(0,"", ""))

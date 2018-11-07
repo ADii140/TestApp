@@ -40,8 +40,16 @@ namespace KapelMajster.Controllers
         }
 
         [HttpPost]
-        [ActionName("Remove")]
-        public IActionResult Kategorie(string item)
+        [ActionName("RemoveCategory")]
+        public IActionResult Kategorie(int item)
+        {
+            Category.RemoveCateogryFromDb(item);
+            return RedirectToAction("Kategorie");
+        }
+
+        [HttpPost]
+        [ActionName("RemoveCategory")]
+        public IActionResult Kategorie(int item)
         {
             Category.RemoveCateogryFromDb(item);
             return RedirectToAction("Kategorie");
