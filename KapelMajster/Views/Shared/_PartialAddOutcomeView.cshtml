@@ -1,5 +1,16 @@
 ﻿@model Outcome
-
+@{
+    var categoryList = ViewData["CategoryList"] as List<Category>;
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    foreach (var category in categoryList)
+    {
+        listItems.Add(new SelectListItem
+        {
+            Text = category.CategoryName,
+            Value = category.CategoryId.ToString()
+        });
+    }
+}
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOutcome">Dodaj wydatek</button>
 <div class="modal fade" id="addOutcome">
     <form asp-action="Wydatki" onsubmit="window.location.reload">
@@ -10,16 +21,22 @@
                 </div>
                 <div class="modal-body">
                     <div>
-                        <label class="control-label">Nazwa</label><input asp-for="OutcomeName" class="form-control" />
-                    </div>
-                    <div>
                         <label class="control-label">Kwota</label><input asp-for="OutcomeValue" class="form-control" />
                     </div>
                     <div>
                         <label class="control-label">Data</label><input asp-for="OutcomeDate" class="form-control" />
                     </div>
+                    
                     <div>
-                        <label class="control-label">Kategoria</label><input asp-for="OutcomeCategory" class="form-control" />
+                        <label class="control-label">Kategoria</label><select class="form-control" id="sel1" name="OutcomeCategoryId">
+                        @foreach(var category in categoryList)
+                        {
+                            <option value="@category.CategoryId">@category.CategoryName</option>
+                        }
+                        </select>
+</div>
+                    <div>
+                        <label class="control-label">Opis</label><input asp-for="OutcomeName" class="form-control" />
                     </div>
                 </div>
                 <div class="modal-footer ">

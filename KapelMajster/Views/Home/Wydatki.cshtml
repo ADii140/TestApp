@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Wydatki";
+    ViewData["CategoryList"] = ViewBag.CategoryList;
 }
 <h3>@ViewData["Message"]</h3>
 
@@ -12,9 +13,7 @@
             <table class="table table-bordered table-responsive-md table-striped text-center" id="dtBasicExample">
                 <thead>
                     <tr>
-                        <th class="th-sm text-center">
-                            Nazwa wydatku
-                        </th>
+
                         <th class="th-sm text-center">
                             Kwota
                         </th>
@@ -23,6 +22,9 @@
                         </th>
                         <th class="th-sm text-center">
                             Data
+                        </th>
+                        <th class="th-sm text-center">
+                            Opis
                         </th>
                         <th class="th-sm text-center">
                             Usuń
@@ -41,21 +43,22 @@
                         @foreach (var item in Model)
                         {
                         <tr>
-                            <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeName)</td>
+
                             <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeValue)</td>
-                            <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeCategory)</td>
+                            <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeCategory.CategoryName)</td>
                             <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeDate)</td>
+                            <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeName)</td>
                             <td>
                                 <span>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeCategory-@item.OutcomeName.Replace(" ","")">Usuń</button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeOutcome-@item.OutcomeName.Replace(" ","")">Usuń</button>
                                 </span>
-                                <div class="modal fade" id="removeCategory-@item.OutcomeName.Replace(" ","")">
-                                    <form asp-action="Remove" id="RemoveCategory-@item.OutcomeName.Replace(" ","")">
+                                <div class="modal fade" id="removeOutcome-@item.OutcomeName.Replace(" ","")">
+                                    <form asp-action="Remove" id="removeOutcome-@item.OutcomeName.Replace(" ","")">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title">Czy na pewno chcesz usunąć kategorię <label>@item.OutcomeName</label>?</h4>
-                                                    <input asp-for="@item" type="hidden" value="@item.OutcomeName" />
+                                                    <input asp-for="@item" name="OutcomeId" type="hidden" value="@item.OutcomeId" />
                                                 </div>
                                                 <div class="modal-footer ">
                                                     <input type="submit" class="btn btn-primary" value="Usuń" />
@@ -74,4 +77,4 @@
         </div>
     </div>
 </div>
-@Html.Partial(@"~/Views/Shared/_PartialAddOutcomeView.cshtml", new Outcome("", "","",""))
+@Html.Partial(@"~/Views/Shared/_PartialAddOutcomeView.cshtml",  new Outcome(0, "", "", "", new Category(0, "")),ViewData)

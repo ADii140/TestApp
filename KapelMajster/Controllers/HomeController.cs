@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using KapelMajster.Models;
+using System;
 
 namespace KapelMajster.Controllers
 {
@@ -16,14 +17,16 @@ namespace KapelMajster.Controllers
         public IActionResult Kategorie()
         {
             CategoryViewModel categoriesList = new CategoryViewModel();
-            ViewData["Message"] = "Tutaj możesz dodawać kategorie do bazy";
+            ViewData["Message"] = "Tutaj możesz dodawać kategorie";
             return View(categoriesList.categories);
         }
 
         public IActionResult Wydatki()
         {
+            CategoryViewModel categories = new CategoryViewModel();
+            ViewBag.CategoryList = categories.categories;
             OutcomeViewModel outcomeList = new OutcomeViewModel();
-            ViewData["Message"] = "Tutaj możesz dodawać wydatki do bazy";
+            ViewData["Message"] = "Tutaj możesz dodawać wydatki";
             return View(outcomeList.outcomes);
         }
 
@@ -41,32 +44,29 @@ namespace KapelMajster.Controllers
 
         [HttpPost]
         [ActionName("RemoveCategory")]
-        public IActionResult Kategorie(int item)
+        public IActionResult Kategorie(int CategoryId)
         {
-            Category.RemoveCateogryFromDb(item);
+            try { Category.RemoveCateogryFromDb(CategoryId); }
+            catch (System.Data.SqlClient.SqlException e)
+            {
+                return RedirectToAction("Kategorie", new { Error = e.Number });
+            }
             return RedirectToAction("Kategorie");
         }
 
         [HttpPost]
-        [ActionName("RemoveCategory")]
-        public IActionResult Kategorie(int item)
+        public IActionResult Wydatki(string OutcomeName, string OutcomeValue, int OutcomeCategoryId)
         {
-            Category.RemoveCateogryFromDb(item);
-            return RedirectToAction("Kategorie");
-        }
-
-        [HttpPost]
-        public IActionResult Wydatki(string OutcomeName, string OutcomeValue, string OutcomeCategory)
-        {
-            Outcome.AddOutcomeToDb(OutcomeName, OutcomeValue, OutcomeCategory,"12/12/2012");
+            OutcomeValue = OutcomeValue.Replace(',', '.');
+            Outcome.AddOutcomeToDb(OutcomeName, OutcomeValue, OutcomeCategoryId, "12/12/2012");
             return RedirectToAction("Wydatki");
         }
 
         [HttpPost]
         [ActionName("Remove")]
-        public IActionResult Wydatki(string OutcomeName, string OutcomeValue, string OutcomeCategory, string OutcomeDate)
+        public IActionResult Wydatki(int OutcomeId)
         {
-            Outcome.RemoveOutcomeFromDb(OutcomeName, OutcomeValue, OutcomeCategory, OutcomeDate);
+            Outcome.RemoveOutcomeFromDb(OutcomeId);
             return RedirectToAction("Wydatki");
         }
     }

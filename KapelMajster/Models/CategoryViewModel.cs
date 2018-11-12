@@ -42,6 +42,12 @@ namespace KapelMajster.Models
             this.CategoryDescription = description;
         }
 
+        public Category(int id, string name)
+        {
+            this.CategoryId = id;
+            this.CategoryName = name;
+        }
+
         public static void AddCategoryToDb(string CategoryName, string CategoryDescription)
         {
             using (SqlConnection conn = new SqlConnection(connectionstring))
