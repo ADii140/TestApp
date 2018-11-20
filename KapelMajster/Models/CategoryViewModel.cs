@@ -57,7 +57,7 @@ namespace KapelMajster.Models
                 command.CommandType = CommandType.StoredProcedure;
                 command.Connection = conn;
                 command.Parameters.AddWithValue("@nazwa", CategoryName);
-                command.Parameters.AddWithValue("@opis", CategoryDescription);
+                command.Parameters.AddWithValue("@opis", CategoryDescription==null?"":CategoryDescription);
                 conn.Open();
                 command.ExecuteNonQuery();
                 conn.Close();

@@ -1,4 +1,11 @@
-﻿<div class="modal fade" id="error">
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script type="text/javascript">
+    $(function () {
+        $('#error').modal('show');
+    });
+</script>
+<div class="modal fade" id="error" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,7 +13,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <textarea class="control-label">@ViewData["ErrorMessage"]</textarea>
+                    @Model
                 </div>
             </div>
             <div class="modal-footer ">

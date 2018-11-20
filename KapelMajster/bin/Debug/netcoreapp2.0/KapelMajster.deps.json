@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "65a0a2abc700ff2de01f961aceb1a3c1f3ed1b4f"
+    "signature": "cdd82a471ea502869aa53b65df1d8d85056806a9"
   },
   "compilationOptions": {
     "defines": [
@@ -23,9 +23,12 @@
     ".NETCoreApp,Version=v2.0": {
       "KapelMajster/1.0.0": {
         "dependencies": {
+          "Bootstrap.v3.Datetimepicker": "4.17.45",
+          "Bootstrap.v3.Datetimepicker.CSS": "4.17.45",
           "Microsoft.AspNetCore.All": "2.0.6",
           "Microsoft.NETCore.App": "2.0.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.3"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.3",
+          "Moment.js": "2.22.2"
         },
         "runtime": {
           "KapelMajster.dll": {}
@@ -34,6 +37,29 @@
           "KapelMajster.dll": {}
         }
       },
+      "bootstrap/3.3.0": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "bootstrap.less/3.3.5": {
+        "dependencies": {
+          "jQuery": "1.9.1"
+        }
+      },
+      "Bootstrap.v3.Datetimepicker/4.17.45": {
+        "dependencies": {
+          "Moment.js": "2.22.2",
+          "bootstrap.less": "3.3.5"
+        }
+      },
+      "Bootstrap.v3.Datetimepicker.CSS/4.17.45": {
+        "dependencies": {
+          "Moment.js": "2.22.2",
+          "bootstrap": "3.3.0"
+        }
+      },
+      "jQuery/1.9.1": {},
       "Libuv/1.10.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.0.0"
@@ -2443,6 +2469,7 @@
           "ref/netstandard2.0/Microsoft.Win32.Registry.dll": {}
         }
       },
+      "Moment.js/2.22.2": {},
       "Newtonsoft.Json/10.0.1": {
         "dependencies": {
           "Microsoft.CSharp": "4.4.0",
@@ -4237,6 +4264,41 @@
       "serviceable": false,
       "sha512": ""
     },
+    "bootstrap/3.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BeFmQgpmPCUwWzibAqAMuK2Jit+NRxrRFfZb0bNOdjXtlj4o8tl0P1JrcHm+a7G5SPx7GxfY71b+XclFrVwxNg==",
+      "path": "bootstrap/3.3.0",
+      "hashPath": "bootstrap.3.3.0.nupkg.sha512"
+    },
+    "bootstrap.less/3.3.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Gax42jPnrNPyxpN7lVtvGqoAyPobdDoV9btkiFp1Vv93YUVHKDb8XO7AQQUL3a6+vGeq7LrQFrxr0EohpFMX4A==",
+      "path": "bootstrap.less/3.3.5",
+      "hashPath": "bootstrap.less.3.3.5.nupkg.sha512"
+    },
+    "Bootstrap.v3.Datetimepicker/4.17.45": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gZXNJoEXBY6Z0vZxLOcTwK4G3x4kXKgeHY6pm2OlaIxEBJxaKQEkH4QBDIEY61MP9MR3Dpn+n5dtV8+pES1Egw==",
+      "path": "bootstrap.v3.datetimepicker/4.17.45",
+      "hashPath": "bootstrap.v3.datetimepicker.4.17.45.nupkg.sha512"
+    },
+    "Bootstrap.v3.Datetimepicker.CSS/4.17.45": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CLNTxJbb6gP52h0j6k1bJQbRwviKw9lkkUiYbvPXCgu1K1Cpc8gqvOO2LphOj0exu7Y1BZ9NzxxuLAAffmUJKg==",
+      "path": "bootstrap.v3.datetimepicker.css/4.17.45",
+      "hashPath": "bootstrap.v3.datetimepicker.css.4.17.45.nupkg.sha512"
+    },
+    "jQuery/1.9.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fhILbP37t5mmKMGAaFSp+E0Wv8r4WWzRh0OQOCandjGWT+aa8apzfihmGRpdAMD6quC+8inownvUxQfTcR8rnA==",
+      "path": "jquery/1.9.1",
+      "hashPath": "jquery.1.9.1.nupkg.sha512"
+    },
     "Libuv/1.10.0": {
       "type": "package",
       "serviceable": true,
@@ -5440,6 +5502,13 @@
       "sha512": "sha512-dA36TlNVn/XfrZtmf0fiI/z1nd3Wfp2QVzTdj26pqgP9LFWq0i1hYEUAW50xUjGFYn1+/cP3KGuxT2Yn1OUNBQ==",
       "path": "microsoft.win32.registry/4.4.0",
       "hashPath": "microsoft.win32.registry.4.4.0.nupkg.sha512"
+    },
+    "Moment.js/2.22.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EgvAT9IJFzqrinU32hILf84wjbsqdyu6us5ENc40Xmo7BEaAh6V/YzpYHxt0ipHrCayIesKO6llPAbXHd93Z8g==",
+      "path": "moment.js/2.22.2",
+      "hashPath": "moment.js.2.22.2.nupkg.sha512"
     },
     "Newtonsoft.Json/10.0.1": {
       "type": "package",

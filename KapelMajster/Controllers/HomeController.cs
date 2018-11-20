@@ -18,7 +18,17 @@ namespace KapelMajster.Controllers
         {
             CategoryViewModel categoriesList = new CategoryViewModel();
             ViewData["Message"] = "Tutaj możesz dodawać kategorie";
+            if (Request.QueryString.Value.Contains("Error"))
+            {
+                int errorCode = int.Parse(Request.QueryString.Value.Substring(Request.QueryString.Value.Length-3));
+                if (errorCode.Equals(547)) TempData["sErrMsg"] = "Kategoria nie została usunięta, ponieważ są podpięte do niej wydatki";
+            }
             return View(categoriesList.categories);
+        }
+
+        public PartialViewResult ShowError(String sErrorMessage)
+        {
+            return PartialView("_PartialErrorView.cshtml");
         }
 
         public IActionResult Wydatki()
@@ -55,10 +65,10 @@ namespace KapelMajster.Controllers
         }
 
         [HttpPost]
-        public IActionResult Wydatki(string OutcomeName, string OutcomeValue, int OutcomeCategoryId)
+        public IActionResult Wydatki(string OutcomeName, string OutcomeValue, int OutcomeCategoryId,string OutcomeDate)
         {
             OutcomeValue = OutcomeValue.Replace(',', '.');
-            Outcome.AddOutcomeToDb(OutcomeName, OutcomeValue, OutcomeCategoryId, "12/12/2012");
+            Outcome.AddOutcomeToDb(OutcomeName, OutcomeValue, OutcomeCategoryId, OutcomeDate);
             return RedirectToAction("Wydatki");
         }
 

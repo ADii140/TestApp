@@ -10,7 +10,9 @@
             Value = category.CategoryId.ToString()
         });
     }
+    var date = DateTime.Today;
 }
+
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOutcome">Dodaj wydatek</button>
 <div class="modal fade" id="addOutcome">
     <form asp-action="Wydatki" onsubmit="window.location.reload">
@@ -24,17 +26,31 @@
                         <label class="control-label">Kwota</label><input asp-for="OutcomeValue" class="form-control" />
                     </div>
                     <div>
-                        <label class="control-label">Data</label><input asp-for="OutcomeDate" class="form-control" />
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#date').datetimepicker({
+                                    defaultDate: '@date',
+                                    locale: 'pl',
+                                    format: 'L'
+                                });
+                            });
+                        </script>
+                        <label class="control-label">Data</label>
+                        <div class='input-group date' id='date'>
+                            <input asp-for="OutcomeDate" type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
                     </div>
-                    
                     <div>
                         <label class="control-label">Kategoria</label><select class="form-control" id="sel1" name="OutcomeCategoryId">
-                        @foreach(var category in categoryList)
-                        {
-                            <option value="@category.CategoryId">@category.CategoryName</option>
-                        }
+                            @foreach (var category in categoryList)
+                            {
+                                <option value="@category.CategoryId">@category.CategoryName</option>
+                            }
                         </select>
-</div>
+                    </div>
                     <div>
                         <label class="control-label">Opis</label><input asp-for="OutcomeName" class="form-control" />
                     </div>

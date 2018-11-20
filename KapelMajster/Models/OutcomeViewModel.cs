@@ -60,7 +60,7 @@ namespace KapelMajster.Models
                 command.CommandText = "DodajWydatek";
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@kwota",OutcomeValue);
-                command.Parameters.AddWithValue("@nazwa", OutcomeName);
+                command.Parameters.AddWithValue("@nazwa", OutcomeName==null?"":OutcomeName);
                 command.Parameters.AddWithValue("@data", OutcomeDate);
                 command.Parameters.AddWithValue("@kat_nazwa", OutcomeCategoryId);
                 command.Connection = conn;

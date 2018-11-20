@@ -68,5 +68,7 @@
     </div>
 </div>
 @Html.Partial(@"~/Views/Shared/_PartialAddCategoryView.cshtml", new Category(0, "", ""))
-@if (ViewBag.ErrorMessage != null)
-{@Html.Partial(@"~/Views/Shared/_PartialErrorView.cshtml", ViewData)}
+@if (TempData["sErrMsg"] != null)
+{
+    Html.RenderPartial(@"~/Views/Shared/_PartialErrorView.cshtml", TempData["sErrMsg"]);
+}

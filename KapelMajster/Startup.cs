@@ -43,7 +43,7 @@ namespace KapelMajster
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Kategorie}/{id?}");
+                    template: "{controller=Home}/{action=Kategorie}/{id&error?}");
             });
         }
     }
