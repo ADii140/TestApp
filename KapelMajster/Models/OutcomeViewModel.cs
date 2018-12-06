@@ -41,23 +41,27 @@ namespace KapelMajster.Models
             using (SqlConnection conn = new SqlConnection(connectionstring))
             {
                 SqlCommand command = new SqlCommand();
-                command.CommandText = "NAZWA_PROCEDURY";
+                command.CommandText = "PobierzSumyWydatkow";
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@od", "01-12-2012");
-                command.Parameters.AddWithValue("@do", "31-12-2012");
+                command.Parameters.AddWithValue("@data_od", "01-12-2012");
+                command.Parameters.AddWithValue("@data_do", "31-12-2018");
                 command.Connection = conn;
+                conn.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    Dictionary<string, double> temp= new Dictionary<string, double>();
+                    Dictionary<string, decimal> temp= new Dictionary<string, decimal>();
                     for (int i = 2; i < reader.FieldCount; i++)
                     {
-                        if (!reader.GetValue(i).Equals(0)) temp.Add(reader.GetName(i),(double)reader.GetValue(i));
+                        Console.Write(reader.GetValue(i).GetType().ToString());
+                        if (reader.GetValue(i).GetType() != typeof(DBNull)) temp.Add(reader.GetName(i),(decimal)reader.GetValue(i));
                     }
                     var tempOutcomeForJson = new { date = reader.GetValue(0), sum = reader.GetValue(1), pie = temp };
                     OutcomesForJson.Add(tempOutcomeForJson);
                 }
                 conn.Close();
+                string json = JsonConvert.SerializeObject(OutcomesForJson,Formatting.Indented);
+                System.IO.File.WriteAllText(@"wwwroot\json\data.json", json);
             }
         }
     }

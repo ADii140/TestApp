@@ -3,9 +3,10 @@
 @{
     ViewData["Title"] = "Wydatki";
     ViewData["CategoryList"] = ViewBag.CategoryList;
+    ViewData["ChartJson"] = System.IO.File.ReadAllText(@"./wwwroot/json/data.json", System.Text.Encoding.UTF8);
 }
 <h3>@ViewData["Message"]</h3>
-
+@Html.Partial(@"~/Views/Shared/_PartialChartView.cshtml",ViewData)
 <div class="card">
     <div class="card-body">
         <div id="table" class="table-editable">
@@ -42,34 +43,34 @@
                     {
                         @foreach (var item in Model)
                         {
-                        <tr>
+                            <tr>
 
-                            <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeValue)</td>
-                            <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeCategory.CategoryName)</td>
-                            <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeDate)</td>
-                            <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeName)</td>
-                            <td>
-                                <span>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeOutcome-@item.OutcomeName.Replace(" ","")">Usuń</button>
-                                </span>
-                                <div class="modal fade" id="removeOutcome-@item.OutcomeName.Replace(" ","")">
-                                    <form asp-action="Remove" id="removeOutcome-@item.OutcomeName.Replace(" ","")">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Czy na pewno chcesz usunąć kategorię <label>@item.OutcomeName</label>?</h4>
-                                                    <input asp-for="@item" name="OutcomeId" type="hidden" value="@item.OutcomeId" />
-                                                </div>
-                                                <div class="modal-footer ">
-                                                    <input type="submit" class="btn btn-primary" value="Usuń" />
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                                <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeValue)</td>
+                                <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeCategory.CategoryName)</td>
+                                <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeDate)</td>
+                                <td class="pt-5-half" contenteditable="true">@Html.DisplayFor(m => item.OutcomeName)</td>
+                                <td>
+                                    <span>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeOutcome-@item.OutcomeName.Replace(" ","")">Usuń</button>
+                                    </span>
+                                    <div class="modal fade" id="removeOutcome-@item.OutcomeName.Replace(" ","")">
+                                        <form asp-action="Remove" id="removeOutcome-@item.OutcomeName.Replace(" ","")">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Czy na pewno chcesz usunąć kategorię <label>@item.OutcomeName</label>?</h4>
+                                                        <input asp-for="@item" name="OutcomeId" type="hidden" value="@item.OutcomeId" />
+                                                    </div>
+                                                    <div class="modal-footer ">
+                                                        <input type="submit" class="btn btn-primary" value="Usuń" />
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
                         }
                     }
                 </tbody>
@@ -77,4 +78,4 @@
         </div>
     </div>
 </div>
-@Html.Partial(@"~/Views/Shared/_PartialAddOutcomeView.cshtml",  new Outcome(0, "", "", "", new Category(0, "")),ViewData)
+@Html.Partial(@"~/Views/Shared/_PartialAddOutcomeView.cshtml", new Outcome(0, "", "", "", new Category(0, "")), ViewData)
